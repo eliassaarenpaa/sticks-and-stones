@@ -24,16 +24,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        Vector3 cameraUpDirecition = _camera.transform.up;
-        Vector3 cameraRightDirection = _camera.transform.right;
-        _movementInput = cameraUpDirecition * Input.GetAxisRaw("Vertical") + cameraRightDirection * Input.GetAxisRaw("Horizontal");
-        _movementInput.y = 0;
+        //Vector3 cameraUpDirecition = _camera.transform.up;
+        //Vector3 cameraRightDirection = _camera.transform.right;
+        _movementInput = new Vector3( Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
+        _movementInput.z = 0;
         _movementInput.Normalize();
 
         if (_movementInput.x != 0)
         {
-            _movingLeft = Mathf.Sign((cameraRightDirection * Input.GetAxisRaw("Horizontal")).x) < 0;
+            _movingLeft = Mathf.Sign(Input.GetAxisRaw("Horizontal")) < 0;
             spriteRenderer.flipX = _movingLeft;
+            //transform.localScale = new Vector3(_movingLeft ? -1 : 1, 1, 1);
         }
 
         animator.SetBool("IsMoving", IsMoving);
