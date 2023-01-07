@@ -89,7 +89,7 @@ public class Enemy : MonoBehaviour, IDefender
             collider.isTrigger = true;
 
             spriteRend.sprite = instance.sprite;
-            instance.transform.SetParent(transform.parent);
+            //instance.transform.SetParent(transform.parent);
             instance.transform.position = transform.position;
         }
     }

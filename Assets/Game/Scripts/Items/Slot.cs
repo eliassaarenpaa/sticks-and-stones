@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 
-public class Slot : MonoBehaviour
+[Serializable]
+public class Slot 
 {
     public Item item;
 }

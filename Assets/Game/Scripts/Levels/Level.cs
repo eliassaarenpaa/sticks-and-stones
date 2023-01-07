@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
 
 public class Level : MonoBehaviour
 {
+    [SerializeField] private LevelEventChannel levelEventChannel;
     [SerializeField] private float duration;
     [SerializeField] private float spawnRateMin, spawnRateMax;
     [SerializeField] private int maxEnemies;
@@ -16,6 +18,8 @@ public class Level : MonoBehaviour
     private float _spawnRateTimer;
     private float _currentSpawnRate;
 
+    private int _enemiesSpawned;
+    private bool _isCompleted;
 
     private void Awake()
     {
@@ -24,16 +28,32 @@ public class Level : MonoBehaviour
 
     public void StartLevel()
     {
+        _isCompleted = false;
         _spawnRateTimer = 0;
         _currentSpawnRate = GetRandomSpawnRate();
+        StartCoroutine(CompleteRoutine());
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 
     private void Update()
     {
+        //if(_enemiesSpawned >= maxEnemies && !_isCompleted)
+        //{
+        //    _isCompleted = true;
+        //    levelEventChannel.CompleteLevel();
+
+        //    return;
+        //}
+
         _spawnRateTimer += Time.deltaTime;
 
         if(_spawnRateTimer >= _currentSpawnRate)
         {
+            //_enemiesSpawned++;
             _currentSpawnRate = GetRandomSpawnRate();
             _spawnRateTimer = 0;
 
@@ -62,6 +82,20 @@ public class Level : MonoBehaviour
     private float GetRandomSpawnRate()
     {
         return Random.Range(spawnRateMin, spawnRateMax);
+    }
+
+    private IEnumerator CompleteRoutine()
+    {
+        levelEventChannel.SetLevelTimerForUI(duration);
+
+        var dur = duration;
+        while(dur > 0)
+        {
+            dur -= Time.deltaTime;
+            yield return null;
+        }
+
+        levelEventChannel.CompleteLevel();
     }
 
 }

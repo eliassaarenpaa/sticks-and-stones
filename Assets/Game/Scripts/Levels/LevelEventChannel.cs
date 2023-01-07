@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,6 +6,9 @@ public class LevelEventChannel : ScriptableObject
 {
     public UnityEvent onStartNewLevel = new UnityEvent();
     public UnityEvent onStopLevel = new UnityEvent();
+    public UnityEvent onCompleteLevel = new UnityEvent();
+
+    public UnityEvent<float> onSetLevelTimerForUI = new UnityEvent<float>();
 
     public void StartNewLevel()
     {
@@ -18,6 +18,16 @@ public class LevelEventChannel : ScriptableObject
     public void StopLevel()
     {
         onStopLevel?.Invoke();
+    }
+
+    public void CompleteLevel()
+    {
+        onCompleteLevel?.Invoke();
+    }
+
+    public void SetLevelTimerForUI(float timeInSeconds)
+    {
+        onSetLevelTimerForUI?.Invoke(timeInSeconds);
     }
 
 }

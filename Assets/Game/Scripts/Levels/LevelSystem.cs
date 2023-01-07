@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,17 +13,17 @@ public class LevelSystem : MonoBehaviour
 
     private void OnEnable()
     {
-        levelEventChannel.onStartNewLevel.AddListener(StartNextLevel);
-        levelEventChannel.onStopLevel.AddListener(StopLevel);
-
+        levelEventChannel.onStartNewLevel.AddListener(OnStartNextLevel);
+        levelEventChannel.onStopLevel.AddListener(OnStopLevel);
+        levelEventChannel.onCompleteLevel.AddListener(OnCompleteLevel);
         gameStateEventChannel.onGameStateChanged.AddListener(OnGameStateChanged);
     }
 
     private void OnDisable()
     {
-        levelEventChannel.onStartNewLevel.RemoveListener(StartNextLevel);
-        levelEventChannel.onStopLevel.RemoveListener(StopLevel);
-
+        levelEventChannel.onStartNewLevel.RemoveListener(OnStartNextLevel);
+        levelEventChannel.onStopLevel.RemoveListener(OnStopLevel);
+        levelEventChannel.onCompleteLevel.RemoveListener(OnCompleteLevel);
         gameStateEventChannel.onGameStateChanged.RemoveListener(OnGameStateChanged);
     }
 
@@ -34,11 +35,11 @@ public class LevelSystem : MonoBehaviour
         }
         else if (state == GameState.Failure)
         {
-            StopLevel();
+            OnStopLevel();
         }
     }
 
-    private void StartNextLevel()
+    private void OnStartNextLevel()
     {
         _currentLevelIndex++;
 
@@ -54,7 +55,13 @@ public class LevelSystem : MonoBehaviour
         _currentLevel.StartLevel();
     }
 
-    private void StopLevel()
+    private void OnCompleteLevel()
+    {
+        OnStopLevel();
+        gameStateEventChannel.ChangeState(2);
+    }
+
+    private void OnStopLevel()
     {
         if (_currentLevel?.gameObject)
         {
@@ -64,7 +71,7 @@ public class LevelSystem : MonoBehaviour
 
     private void Restart()
     {
-        StopLevel();
+        OnStopLevel();
         _currentLevel = null;
         _currentLevelIndex = -1;
     }

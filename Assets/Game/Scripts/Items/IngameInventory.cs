@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class IngameInventory : Inventory
@@ -10,11 +7,13 @@ public class IngameInventory : Inventory
     private void OnEnable()
     {
         inventoryEventChannel.onAddItemToIngameInventory.AddListener(OnAddItemToIngameInventory);
+        inventoryEventChannel.onRemoveItemFromIngameInventory.AddListener(OnRemoveItemFromIngameInventory);
     }
 
     private void OnDisable()
     {
         inventoryEventChannel.onAddItemToIngameInventory.RemoveListener(OnAddItemToIngameInventory);
+        inventoryEventChannel.onRemoveItemFromIngameInventory.RemoveListener(OnRemoveItemFromIngameInventory);
     }
 
     private void OnAddItemToIngameInventory(int index, Item item)
@@ -33,6 +32,11 @@ public class IngameInventory : Inventory
             itemSlots[index].item = item;
             item.gameObject.SetActive(false);
         }
+    }
+
+    private void OnRemoveItemFromIngameInventory(int index)
+    {
+        itemSlots[index] = null;
     }
 
 }
