@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerWeaponController : MonoBehaviour
 {
+    [SerializeField] private Animator weaponAnimator;
     [SerializeField] private Transform weaponParent;
     [SerializeField] private SpriteRenderer weapon;
 
-    void Update()
+    private void Update()
     {
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = 5.23f;
@@ -26,6 +27,11 @@ public class PlayerWeaponController : MonoBehaviour
         weapon.sortingOrder = weapon.transform.position.y > transform.position.y ? -1 : 1;
 
         //weapon.transform.position = transform.position + -directionToMouse * 2f;
+
+        if (Input.GetMouseButton(0))
+        {
+            weaponAnimator.Play("Attack");
+        }
 
     }
 }

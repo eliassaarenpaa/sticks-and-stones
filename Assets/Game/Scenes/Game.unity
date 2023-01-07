@@ -1792,6 +1792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8a4e7b6b975e2b46a69c2a5b1abbfdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponAnimator: {fileID: 2066578174}
   weaponParent: {fileID: 1260549787}
   weapon: {fileID: 2066578173}
 --- !u!114 &857187451
