@@ -1,6 +1,4 @@
 using UnityEngine;
-using static UnityEditor.Progress;
-
 public class PlayerItemCollector : MonoBehaviour
 {
     [SerializeField] InventoryEventChannel inventoryEventChannel;

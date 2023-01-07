@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LevelSystem : MonoBehaviour
@@ -63,6 +64,12 @@ public class LevelSystem : MonoBehaviour
 
     private void OnStopLevel()
     {
+        // Clear items
+        foreach (var item in FindObjectsOfType<Item>())
+        {
+            Destroy(item.gameObject);
+        }
+
         if (_currentLevel?.gameObject)
         {
             Destroy(_currentLevel.gameObject);

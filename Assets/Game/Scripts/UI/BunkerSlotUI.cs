@@ -22,7 +22,7 @@ public class BunkerSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         if (_isHovering)
         {
-            bunkerItemDragUI.SelectItem(inventoryType, slotIndex);
+            bunkerItemDragUI.OnPressDown(inventoryType, slotIndex);
         }
     }
 

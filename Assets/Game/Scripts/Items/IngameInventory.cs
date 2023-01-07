@@ -18,19 +18,27 @@ public class IngameInventory : Inventory
 
     private void OnAddItemToIngameInventory(int index, Item item)
     {
-        var existingItem = itemSlots[index].item;
+        var existingItem = itemSlots[index]?.item;
 
         if(existingItem != null)
         {
             item.gameObject.SetActive(false);
             existingItem.transform.position = item.transform.position;
             existingItem.gameObject.SetActive(true);
-            itemSlots[index].item = item;
+
+
+            if (itemSlots[index] != null)
+            {
+                itemSlots[index].item = item;
+            }
         }
         else
         {
-            itemSlots[index].item = item;
-            item.gameObject.SetActive(false);
+            if (itemSlots[index] != null)
+            {
+                itemSlots[index].item = item;
+                item.gameObject.SetActive(false);
+            }
         }
     }
 

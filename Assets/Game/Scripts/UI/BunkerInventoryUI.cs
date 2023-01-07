@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class BunkerInventoryUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private InventoryEventChannel inventoryEventChannel;
+    [SerializeField] private List<SlotUI> slotUIs;
+
+    private void OnEnable()
     {
-        
+        inventoryEventChannel.onAddItemToBunkerInventory.AddListener(OnAddItemToBunkerInventory);
+        inventoryEventChannel.onRemoveItemFromBunkerInventory.AddListener(OnRemoveItemFromBunkerInventory);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        inventoryEventChannel.onAddItemToIngameInventory.RemoveListener(OnAddItemToBunkerInventory);
+        inventoryEventChannel.onRemoveItemFromBunkerInventory.RemoveListener(OnRemoveItemFromBunkerInventory);
+    }
+
+    private void OnAddItemToBunkerInventory(int index, Item item)
+    {
+        slotUIs[index]?.UpdateUI(item.sprite);
+    }
+
+    private void OnRemoveItemFromBunkerInventory(int index)
+    {
+        slotUIs[index]?.UpdateUI(null);
     }
 }

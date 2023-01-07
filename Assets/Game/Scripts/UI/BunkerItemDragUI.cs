@@ -9,56 +9,121 @@ public class BunkerItemDragUI : MonoBehaviour
     [SerializeField] private Canvas canvas;
     [SerializeField] private InventoryEventChannel inventoryEventChannel;
     [SerializeField] private IngameInventory ingameInventory;
-    [SerializeField] private IngameInventory bunkerInventory;
+    [SerializeField] private BunkerInventory bunkerInventory;
     [SerializeField] private Image selected;
 
     private Item _selectedItem;
     private Index _originIndex;
 
-    private Camera _cam;
-
-    private void Awake()
+    public void OnPressDown(InventoryType inventoryType , int index)
     {
-        _cam = Camera.main;
-    }
+        //_originIndex = index;
 
-    public void SelectItem(InventoryType inventoryType , int index)
-    {
-        _originIndex = index;
 
         switch (inventoryType)
         {
             case InventoryType.Ingame:
-                var slot = ingameInventory.itemSlots[index];
+                var ingameSlot = ingameInventory.itemSlots[index];
+
+                if (ingameSlot == null)
+                {
+                    return;
+                }
 
                 // Pick up item
                 if (_selectedItem == null)
                 {
                     // If No Item -> Do nothing
-                    if(slot.item == null)
+                    if(ingameSlot.item == null)
                     {
                         return;
                     }
                     // If item -> Pick up the item
                     else
                     {
-                        _selectedItem = slot.item;
+                        _selectedItem = ingameSlot.item;
                         inventoryEventChannel.RemoveItemFromIngameInventory(index);
                         selected.sprite = _selectedItem.sprite;
                         selected.enabled = true;
                     }
 
                 }
-                // If empty -> Drop item
-                // If not empty -> Merge item
                 else
                 {
-                    
+                    // If empty -> Drop item
+                    if (ingameSlot.item == null)
+                    {
+                        inventoryEventChannel.AddItemToIngameInventory(index, _selectedItem);
+                        _selectedItem = null;
+                        selected.sprite = null;
+                        selected.enabled = false;
+                    }
+                    // If not empty -> Merge item
+                    else
+                    {
+                        inventoryEventChannel.MergeItems(InventoryType.Ingame, index, ingameSlot.item, _selectedItem);
+                        _selectedItem = null;
+                        selected.sprite = null;
+                        selected.enabled = false;
+                    }
                 }
-                
+
 
                 break;
             case InventoryType.Bunker:
+
+                var bunkerSlot = bunkerInventory.itemSlots[index];
+
+                if(bunkerSlot == null)
+                {
+                    return;
+                }
+
+                // Pick up item
+                if (_selectedItem == null)
+                {
+                    if (index == 0)
+                    {
+                        // Dont allow to pickup the weapon!
+                        return;
+                    }
+
+                    // If No Item -> Do nothing
+                    if (bunkerSlot.item == null)
+                    {
+                        return;
+                    }
+                    // If item -> Pick up the item
+                    else
+                    {
+                        _selectedItem = bunkerSlot.item;
+                        inventoryEventChannel.RemoveItemFromBunkerInventory(index);
+                        selected.sprite = _selectedItem.sprite;
+                        selected.enabled = true;
+                    }
+
+                }
+                else
+                {
+                    // If empty -> Drop item
+                    if (bunkerSlot.item == null)
+                    {
+                        inventoryEventChannel.AddItemToBunkerInventory(index, _selectedItem);
+                        _selectedItem = null;
+                        selected.sprite = null;
+                        selected.enabled = false;
+                    }
+                    // If not empty -> Merge item
+                    else
+                    {
+                        inventoryEventChannel.MergeItems(InventoryType.Bunker, index, bunkerSlot.item, _selectedItem);
+                        _selectedItem = null;
+                        selected.sprite = null;
+                        selected.enabled = false;
+                    }
+
+                }
+
                 break;
         }
 

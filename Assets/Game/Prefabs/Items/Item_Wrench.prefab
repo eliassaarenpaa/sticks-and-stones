@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item_Wrench
       objectReference: {fileID: 0}
+    - target: {fileID: 3142073524057396568, guid: a8c68b6e0ecc2ba48a1e3001fe88dc3b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3142073524057396569, guid: a8c68b6e0ecc2ba48a1e3001fe88dc3b, type: 3}
       propertyPath: m_RootOrder
       value: 0
