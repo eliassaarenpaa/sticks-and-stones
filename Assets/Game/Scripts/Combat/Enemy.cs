@@ -1,8 +1,11 @@
 using DG.Tweening;
+using System.Management.Instrumentation;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDefender
 {
+    [SerializeField] private AudioSource deathSource;
+    [SerializeField] private ItemDropTable itemDropTable;
     [SerializeField] private Animator enemyAnimator;
     [SerializeField] private ParticleSystem hitParticle;
     [SerializeField] private float knockbackMoveForce;
@@ -65,6 +68,29 @@ public class Enemy : MonoBehaviour, IDefender
     {
         Destroy(col);
         enemyAnimator.Play("Death");
+        Invoke(nameof(DropItem), 0.1f);
+        deathSource.Play();
         Destroy(gameObject, 1);
+    }
+
+    private void DropItem()
+    {
+        var random = Random.Range(0f, 1f);
+        var randomItem = itemDropTable.GetRandomItem();
+
+        if (random <= randomItem.dropChance)
+        {
+            var instance = Instantiate(randomItem);
+            var spriteRend = instance.gameObject.AddComponent<SpriteRenderer>();
+            var collider = instance.gameObject.AddComponent<CircleCollider2D>();
+
+            collider.offset = new Vector2(0.5f, 0.5f);
+            collider.radius = 0.5f;
+            collider.isTrigger = true;
+
+            spriteRend.sprite = instance.sprite;
+            instance.transform.SetParent(transform.parent);
+            instance.transform.position = transform.position;
+        }
     }
 }

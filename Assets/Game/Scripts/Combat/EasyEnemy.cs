@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EasyEnemy : Enemy
 {
+    [SerializeField] private AudioSource spawnSource;
+    [SerializeField] private AudioSource hurtSource;
+    [SerializeField] private AudioSource shootSource;
+
     [SerializeField] private Animator weaponChargeAnimator;
     [SerializeField] private float movementSpeed;
     [SerializeField] private float distanceFromPlayerToShoot;
@@ -30,6 +34,11 @@ public class EasyEnemy : Enemy
     private void Start()
     {
         _canShoot = true;
+    }
+
+    private void OnEnable()
+    {
+        spawnSource.Play();
     }
 
     private void OnDestroy()
@@ -81,11 +90,13 @@ public class EasyEnemy : Enemy
         yield return new WaitForSeconds(chargeDuration);
 
         var bullet = Instantiate(bulletPrefab);
+
         if (bullet)
         {
             bullet.transform.position = bulletSpawnPos.transform.position;
             bullet.SetDireciton(DirectionToPlayer);
             bullet.gameObject.SetActive(true);
+            shootSource.Play();
         }
 
         shootParticle.Play();
@@ -100,7 +111,9 @@ public class EasyEnemy : Enemy
     {
         base.Defend(attacker, attackDir, contactPoint);
 
-        if(Health > 0)
+        hurtSource.Play();
+
+        if (Health > 0)
         {
             GetStunned();
         }
