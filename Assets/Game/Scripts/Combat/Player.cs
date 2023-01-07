@@ -5,29 +5,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IDefender
 {
+    [SerializeField] private Animator playerAnimator;
+    [SerializeField] private PlayerEventChannel playerEventChannel;
     [SerializeField] private PlayerHealthEventChannel playerHealthEventChannel;
     [SerializeField] private GameStateEventChannel gameStateEventChannel;
+    [SerializeField] private LevelEventChannel levelEventChannel;
 
-    [SerializeField] private int initialHealth;
     private int _currentHealth;
-
-    private void OnEnable()
-    {
-        gameStateEventChannel.onGameStateChanged.AddListener(OnGameStateChanged);
-    }
-
-    private void OnDisable()
-    {
-        gameStateEventChannel.onGameStateChanged.RemoveListener(OnGameStateChanged);
-    }
-
-    private void OnGameStateChanged(GameState state)
-    {
-        if(state == GameState.Game)
-        {
-            Health = 3;
-        }
-    }
 
     public int Health { get => _currentHealth; set {
             _currentHealth = value;
@@ -49,7 +33,20 @@ public class Player : MonoBehaviour, IDefender
 
     private void Die()
     {
-        //Destroy(gameObject);
+        GetComponent<PlayerMovement>().enabled = false;
+        GetComponent<PlayerWeaponController>().enabled = false;
+        playerAnimator.Play("Death");
+        StartCoroutine(DestroyPlayer());
+        Time.timeScale = 0;
+    }
+
+    private IEnumerator DestroyPlayer()
+    {
+        yield return new WaitForSecondsRealtime(1);
+        Time.timeScale = 1;
+        playerEventChannel.DestroyPlayer();
+        levelEventChannel.StopLevel();
+        gameStateEventChannel.ChangeState(3);
     }
 
 

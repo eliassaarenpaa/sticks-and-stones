@@ -24,14 +24,18 @@ public class PauseSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape)) 
         {
-            if (!_isPaused)
+            if(gameStateEventChannel.GetCurrentState == GameState.Paused || gameStateEventChannel.GetCurrentState == GameState.Game)
             {
-                gameStateEventChannel.ChangeState(-1);
+                if (!_isPaused)
+                {
+                    gameStateEventChannel.ChangeState(-1);
+                }
+                else
+                {
+                    gameStateEventChannel.ChangeToPreviousState();
+                }
             }
-            else
-            {
-                gameStateEventChannel.ChangeToPreviousState();
-            }
+
         }
     }
     private void OnGameStateChanged(GameState state)

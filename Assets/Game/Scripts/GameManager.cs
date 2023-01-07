@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        gameStateEventChannel.changeGameState?.Invoke(initialState);
+        gameStateEventChannel.ChangeState((int)initialState);
     }
 
     private void OnEnable()

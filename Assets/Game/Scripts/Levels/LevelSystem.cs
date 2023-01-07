@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class LevelSystem : MonoBehaviour
 {
+    [SerializeField] private LevelEventChannel levelEventChannel;
     [SerializeField] private GameStateEventChannel gameStateEventChannel;
     [SerializeField] private List<Level> allLevels;
 
@@ -11,25 +12,27 @@ public class LevelSystem : MonoBehaviour
 
     private void OnEnable()
     {
+        levelEventChannel.onStartNewLevel.AddListener(StartNextLevel);
+        levelEventChannel.onStopLevel.AddListener(StopLevel);
+
         gameStateEventChannel.onGameStateChanged.AddListener(OnGameStateChanged);
     }
 
     private void OnDisable()
     {
+        levelEventChannel.onStartNewLevel.RemoveListener(StartNextLevel);
+        levelEventChannel.onStopLevel.RemoveListener(StopLevel);
+
         gameStateEventChannel.onGameStateChanged.RemoveListener(OnGameStateChanged);
     }
 
     private void OnGameStateChanged(GameState state)
     {
-        if(state == GameState.Game)
-        {
-            StartNextLevel();
-        }
-        else if(state == GameState.MainMenu)
+        if(state == GameState.MainMenu)
         {
             Restart();
         }
-        else 
+        else if (state == GameState.Failure)
         {
             StopLevel();
         }

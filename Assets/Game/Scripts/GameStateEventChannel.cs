@@ -20,6 +20,8 @@ public class GameStateEventChannel : ScriptableObject
     private int currentState = 0;
     private int previousState = 0;
 
+    public GameState GetCurrentState => (GameState)currentState;
+
     /// <summary>
     /// -1 = Pause (call toggles it)
     /// 0 = Menu,

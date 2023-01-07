@@ -40,6 +40,7 @@ public class Level : MonoBehaviour
             var spawnPoint = GetSpawnPoint();
             var randomEnemyPrefab = GetRandomEnemy();
             var enemyInstance = Instantiate(randomEnemyPrefab);
+            enemyInstance.transform.SetParent(transform);
             randomEnemyPrefab.transform.position = spawnPoint.position;
             enemyInstance.SetActive(true);
         }
