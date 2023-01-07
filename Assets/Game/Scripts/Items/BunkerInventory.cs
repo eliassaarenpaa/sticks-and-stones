@@ -50,7 +50,7 @@ public class BunkerInventory : Inventory
 
     private void OnRemoveItemFromBunkerInventory(int index)
     {
-        itemSlots[index] = null;
+        itemSlots[index].item = null;
     }
 
     private void Start()

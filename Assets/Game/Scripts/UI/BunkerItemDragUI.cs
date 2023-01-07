@@ -25,10 +25,18 @@ public class BunkerItemDragUI : MonoBehaviour
             case InventoryType.Ingame:
                 var ingameSlot = ingameInventory.itemSlots[index];
 
-                if (ingameSlot == null)
-                {
-                    return;
-                }
+                Debug.Log(ingameInventory.itemSlots.Count);
+
+                Debug.Log("index = " + index);
+                Debug.Log("ingameSlot = " + ingameSlot);
+
+                //if (ingameSlot == null)
+                //{
+                //    return;
+                //}
+
+                Debug.Log("_selectedItem = " + _selectedItem);
+                Debug.Log("ingameSlot.item = " + ingameSlot.item);
 
                 // Pick up item
                 if (_selectedItem == null)
