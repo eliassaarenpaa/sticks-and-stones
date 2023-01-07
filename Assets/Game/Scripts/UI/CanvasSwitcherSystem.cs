@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class CanvasSwitcherSystem : MonoBehaviour
 {
+    [SerializeField] private GameStateEventChannel gameStateEventChannel;
     [SerializeField] private UIEventChannel uIEventChannel;
-    [SerializeField] private PauseEventChannel pauseEventChannel;
     [SerializeField] private float curtainFadeInDuration;
     [SerializeField] private float curtainFadeOutDuration;
 
@@ -14,7 +14,6 @@ public class CanvasSwitcherSystem : MonoBehaviour
     [SerializeField] private string curtainCanvasName;
 
     [SerializeField] private CanvasObject curtain;
-    [SerializeField] private CanvasObject pause;
 
     [SerializeField] private List<CanvasObject> canvasObjects;
 
@@ -27,46 +26,59 @@ public class CanvasSwitcherSystem : MonoBehaviour
         _activeCanvasObject = null;
 
         DisableAllCanvasObjects();
-    }
-
-    private void Start()
-    {
         SwitchToCanvas(defaultCanvasName);
-        DisableCanvas(pause);
     }
     private void OnEnable()
     {
         uIEventChannel.onSwitchToCanvas.AddListener(SwitchToCanvas);
-        pauseEventChannel.onPauseStateChanged.AddListener(OnPause);
+        gameStateEventChannel.onGameStateChanged.AddListener(OnGameStateChanged);
     }
-
 
     private void OnDisable()
     {
         uIEventChannel.onSwitchToCanvas.RemoveListener(SwitchToCanvas);
-        pauseEventChannel.onPauseStateChanged.RemoveListener(OnPause);
+        gameStateEventChannel.onGameStateChanged.RemoveListener(OnGameStateChanged);
     }
 
-    private void OnPause(bool isPaused)
+    private void OnGameStateChanged(GameState state)
     {
-        if (isPaused)
+        switch (state)
         {
-            if(_activeCanvasObject.canvasName == "Game")
-            {
-                DisableAllCanvasObjects();
-            }
-
-            EnableCanvas(pause);
-        }
-        else
-        {
-            if(_activeCanvasObject.canvasName == "Game")
-            {
-                EnableCanvas(_activeCanvasObject);
-            }
-            DisableCanvas(pause);
+            case GameState.Paused:
+                SwitchToCanvas("Pause");
+                break;
+            case GameState.MainMenu:
+                SwitchToCanvas("Menu");
+                break;
+            case GameState.Game:
+                SwitchToCanvas("Game");
+                break;
+            case GameState.Bunker:
+                SwitchToCanvas("Bunker");
+                break;
         }
     }
+
+    //private void OnPause(bool isPaused)
+    //{
+    //    if (isPaused)
+    //    {
+    //        if(_activeCanvasObject.canvasName == "Game")
+    //        {
+    //            DisableAllCanvasObjects();
+    //        }
+
+    //        EnableCanvas(pause);
+    //    }
+    //    else
+    //    {
+    //        if(_activeCanvasObject.canvasName == "Game")
+    //        {
+    //            EnableCanvas(_activeCanvasObject);
+    //        }
+    //        DisableCanvas(pause);
+    //    }
+    //}
 
 
     public void SwitchToCanvas(string canvasName)
@@ -106,6 +118,8 @@ public class CanvasSwitcherSystem : MonoBehaviour
 
         _activeCanvasObject = newCanvasObject;
     }
+
+
 
     private void FadeInCurtain(Action callback)
     {

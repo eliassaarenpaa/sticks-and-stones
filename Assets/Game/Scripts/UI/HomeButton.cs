@@ -5,29 +5,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Button))]
 public class HomeButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private UIEventChannel uIEventChannel;
-    [SerializeField] private PauseEventChannel pauseEventChannel;
-
     [SerializeField] private Animator homeButtonAnimator;
-
-    private Button _button;
-
-    private void Awake()
-    {
-        _button = GetComponent<Button>();
-    }
-    private void Start()
-    {
-        _button.onClick.AddListener(GoToMenu);
-    }
-
-    private void OnDestroy()
-    {
-        _button.onClick.RemoveAllListeners();
-    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -37,12 +17,6 @@ public class HomeButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void OnPointerExit(PointerEventData eventData)
     {
         homeButtonAnimator.Play("Home Button");
-    }
-
-    private void GoToMenu()
-    {
-        uIEventChannel.SwitchToCanvas("Menu");
-        pauseEventChannel.TogglePause();
     }
 
 }

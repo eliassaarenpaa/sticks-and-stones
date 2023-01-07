@@ -6,39 +6,43 @@ using UnityEngine;
 public class PauseSystem : MonoBehaviour
 {
     [SerializeField] private UIEventChannel uiEventChannel;
-    [SerializeField] private PauseEventChannel pauseEventChannel;
+    [SerializeField] private GameStateEventChannel gameStateEventChannel;
 
     private bool _isPaused;
 
     private void OnEnable()
     {
-        pauseEventChannel.onTogglePause.AddListener(TogglePause);
+        gameStateEventChannel.onGameStateChanged.AddListener(OnGameStateChanged);
     }
 
     private void OnDisable()
     {
-        pauseEventChannel.onTogglePause.RemoveListener(TogglePause);
+        gameStateEventChannel.onGameStateChanged.RemoveListener(OnGameStateChanged);
     }
 
     private void Update()
     {
-        if (uiEventChannel._activeCanvasName == "Menu")
-        {
-            return;
-        }
-
         if (Input.GetKeyDown(KeyCode.Escape)) 
         {
-            TogglePause();
+            if (!_isPaused)
+            {
+                gameStateEventChannel.ChangeState(-1);
+            }
+            else
+            {
+                gameStateEventChannel.ChangeToPreviousState();
+            }
         }
     }
-
-    private void TogglePause()
+    private void OnGameStateChanged(GameState state)
     {
-        _isPaused = !_isPaused;
+        SetPause(state == GameState.Paused);
+    }
+
+    private void SetPause(bool value)
+    {
+        _isPaused = value;
 
         Time.timeScale = _isPaused ? 0f : 1f;
-
-        pauseEventChannel.onPauseStateChanged?.Invoke(_isPaused);
     }
 }

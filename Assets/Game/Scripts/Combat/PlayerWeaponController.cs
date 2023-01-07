@@ -23,6 +23,8 @@ public class PlayerWeaponController : MonoBehaviour
         weapon.flipY = weapon.transform.position.x <= transform.position.x;
         //var directionToMouse = new Vector3(Mathf.Sin(Mathf.Deg2Rad * angle), Mathf.Cos(Mathf.Deg2Rad * angle)).normalized;
 
+        weapon.sortingOrder = weapon.transform.position.y > transform.position.y ? -1 : 1;
+
         //weapon.transform.position = transform.position + -directionToMouse * 2f;
 
     }
