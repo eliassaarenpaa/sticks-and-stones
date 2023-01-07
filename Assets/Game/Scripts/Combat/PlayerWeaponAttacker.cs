@@ -10,19 +10,24 @@ public class PlayerWeaponAttacker : MonoBehaviour, IAttacker
 
     public Transform Transform => player.transform;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("HIt");
-
-        if(1<<collision.gameObject.layer == enemyLayer)
+        if (1 << collision.gameObject.layer == enemyLayer)
         {
-            IDefender defender = collision.GetComponent<IDefender>();
-            
+            IDefender defender = collision.gameObject.GetComponent<IDefender>();
+
             if (defender != null)
             {
-                var combat = new Combat(this, defender);
+                var attackDir = (transform.position - player.transform.position).normalized;
+                var contact  = collision.contacts[0];
+                var combat = new Combat(this, defender, attackDir, contact.point);
                 combat.Fight();
             }
         }
     }
+
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+        
+    //}
 }

@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public interface IDefender
 {
     int Health { get; set; }
 
-    public void Defend(IAttacker attacker);
+    void Defend(IAttacker attacker, Vector2 attackDir, Vector2 contactPoint);
 
 }

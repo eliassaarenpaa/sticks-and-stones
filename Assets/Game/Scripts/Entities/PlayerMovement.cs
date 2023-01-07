@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private float moveSpeed = 5f; 
 
-    private Rigidbody _rigidbody;
+    private Rigidbody2D _rigidbody;
     private Camera _camera;
     private Vector3 _movementInput;
 
@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody2D>();
         _camera = Camera.main;
     }
 
