@@ -266,22 +266,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 427483427, guid: 717b72eb6913c4a44937437dd04d043e, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 427483427, guid: 717b72eb6913c4a44937437dd04d043e, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 427483427, guid: 717b72eb6913c4a44937437dd04d043e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 427483427, guid: 717b72eb6913c4a44937437dd04d043e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 535043261, guid: 717b72eb6913c4a44937437dd04d043e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -314,14 +298,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 848474464, guid: 717b72eb6913c4a44937437dd04d043e, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: -550
-      objectReference: {fileID: 0}
-    - target: {fileID: 848474464, guid: 717b72eb6913c4a44937437dd04d043e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 275
-      objectReference: {fileID: 0}
     - target: {fileID: 1460228344, guid: 717b72eb6913c4a44937437dd04d043e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -338,19 +314,35 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1948641123, guid: 717b72eb6913c4a44937437dd04d043e, type: 3}
+    - target: {fileID: 1726336888546031987, guid: 717b72eb6913c4a44937437dd04d043e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1948641123, guid: 717b72eb6913c4a44937437dd04d043e, type: 3}
+    - target: {fileID: 1726336888546031987, guid: 717b72eb6913c4a44937437dd04d043e, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1948641123, guid: 717b72eb6913c4a44937437dd04d043e, type: 3}
+    - target: {fileID: 1726336888546031987, guid: 717b72eb6913c4a44937437dd04d043e, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1948641123, guid: 717b72eb6913c4a44937437dd04d043e, type: 3}
+    - target: {fileID: 1726336888546031987, guid: 717b72eb6913c4a44937437dd04d043e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3415644866880409578, guid: 717b72eb6913c4a44937437dd04d043e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3415644866880409578, guid: 717b72eb6913c4a44937437dd04d043e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3415644866880409578, guid: 717b72eb6913c4a44937437dd04d043e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3415644866880409578, guid: 717b72eb6913c4a44937437dd04d043e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -1053,7 +1045,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 767
+    m_Bits: 1791
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1778,6 +1770,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb0cefdf9a8346c41883e9ac510609b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHealthEventChannel: {fileID: 11400000, guid: 1bafb0fa77647fe428f866f8490d684a, type: 2}
+  gameStateEventChannel: {fileID: 11400000, guid: 0303af51e4674af4fbc6cc2643194d23, type: 2}
   initialHealth: 3
 --- !u!58 &857187453
 CircleCollider2D:
@@ -1792,9 +1786,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5}
+  m_Offset: {x: 0, y: -0.16}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.34
 --- !u!50 &857187454
 Rigidbody2D:
   serializedVersion: 4
