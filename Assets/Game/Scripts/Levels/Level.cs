@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
 
@@ -21,7 +20,7 @@ public class Level : MonoBehaviour
     private int _enemiesSpawned;
     private bool _isCompleted;
 
-    private void Awake()
+    private void Start()
     {
         _player = GameObject.FindWithTag("Player").transform;
     }
