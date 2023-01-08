@@ -222,12 +222,9 @@ MonoBehaviour:
   levelEventChannel: {fileID: 11400000, guid: 39500b32fed28d04f81010ea88626815, type: 2}
   gameStateEventChannel: {fileID: 11400000, guid: 0303af51e4674af4fbc6cc2643194d23, type: 2}
   allLevels:
+  - {fileID: 6900733983716086123, guid: 35c00f28d2db4fa4d8c371354f84282a, type: 3}
   - {fileID: 6900733983716086123, guid: d73c5465e0a332d41ab8358754d9c322, type: 3}
-  - {fileID: 6900733983716086123, guid: d73c5465e0a332d41ab8358754d9c322, type: 3}
-  - {fileID: 6900733983716086123, guid: d73c5465e0a332d41ab8358754d9c322, type: 3}
-  - {fileID: 6900733983716086123, guid: d73c5465e0a332d41ab8358754d9c322, type: 3}
-  - {fileID: 6900733983716086123, guid: d73c5465e0a332d41ab8358754d9c322, type: 3}
-  - {fileID: 6900733983716086123, guid: d73c5465e0a332d41ab8358754d9c322, type: 3}
+  - {fileID: 6900733983716086123, guid: a72676457c9d4664bba2d2a7c28a4fc8, type: 3}
 --- !u!1 &74701332
 GameObject:
   m_ObjectHideFlags: 0

@@ -50,7 +50,7 @@ public class EasyEnemy : Enemy
     {
         base.Update();
         
-        transform.localScale = new Vector3(DirectionToPlayer.x < 0 ? -1 : 1, 1, 1);
+        transform.localScale = Mathf.Abs(transform.localScale.x) * new Vector3(DirectionToPlayer.x < 0 ? -1 : 1, 1, 1);
 
 
         if (_isShooting)

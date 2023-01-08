@@ -5175,7 +5175,7 @@ GameObject:
   - component: {fileID: 5394353573816038702}
   - component: {fileID: 5394353573816038696}
   m_Layer: 6
-  m_Name: Robot-001
+  m_Name: Robot-002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5189,8 +5189,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5394353573816038690}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.5299997, y: 2.3399997, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -5.98, y: -2.59, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5394353573616674672}
@@ -5244,7 +5244,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: e68515d4ff0e0994da322e073a0d38c4, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.018630981, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5307,10 +5307,10 @@ MonoBehaviour:
   itemDropTable: {fileID: 11400000, guid: d74f8e81aad886943b6f4513a22d4f8e, type: 2}
   enemyAnimator: {fileID: 5394353573816038696}
   hitParticle: {fileID: 5394353574296584569}
-  knockbackMoveForce: 1
+  knockbackMoveForce: 0.5
   knockbackJumpForce: 0
-  knockbackDuration: 0.1
-  initialHealth: 3
+  knockbackDuration: 0.2
+  initialHealth: 5
   col: {fileID: 5394353573816038701}
   wallLayer:
     serializedVersion: 2
@@ -5319,12 +5319,12 @@ MonoBehaviour:
   hurtSource: {fileID: 2563835282431744133}
   shootSource: {fileID: 2579592075767502061}
   weaponChargeAnimator: {fileID: 5394353574973521997}
-  movementSpeed: 5
-  distanceFromPlayerToShoot: 4
-  chargeDuration: 2
+  movementSpeed: 2
+  distanceFromPlayerToShoot: 6
+  chargeDuration: 1
   shootRecoverDuration: 1
-  stunDuration: 0.1
-  bulletPrefab: {fileID: 8551663813179494205, guid: 3a1a5d3414fa67440bf2287c4d958478, type: 3}
+  stunDuration: 0.2
+  bulletPrefab: {fileID: 8551663813179494205, guid: 4f8efe85bdb22b5479777976d2bd0231, type: 3}
   bulletSpawnPos: {fileID: 5394353573616674672}
   shootParticle: {fileID: 5394353573502967714}
 --- !u!95 &5394353573816038696
