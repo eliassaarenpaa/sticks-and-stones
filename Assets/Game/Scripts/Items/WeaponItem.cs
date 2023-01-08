@@ -5,6 +5,6 @@ namespace Assets.Game.Scripts.Items
 {
     public class WeaponItem : Item
     {
-        public int damage;
+        //public int damage;
     }
 }

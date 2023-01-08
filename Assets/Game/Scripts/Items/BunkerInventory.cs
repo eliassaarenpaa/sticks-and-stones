@@ -4,11 +4,7 @@ using UnityEngine;
 public class BunkerInventory : Inventory
 {
     [SerializeField] private InventoryEventChannel inventoryEventChannel;
-    [SerializeField] private WeaponItem initialWeapon;
-    private void Start()
-    {
-        inventoryEventChannel.AddItemToBunkerInventory(0, Instantiate(initialWeapon));
-    }
+
     private void OnEnable()
     {
         inventoryEventChannel.onAddItemToBunkerInventory.AddListener(OnAddItemToBunkerInventory);
@@ -25,10 +21,10 @@ public class BunkerInventory : Inventory
     {
         var existingItem = itemSlots[index].item;
 
-        if(index == 0)
-        {
-            SetActiveWeapon(item);
-        }
+        //if(index == 0)
+        //{
+        //    SetActiveWeapon(item);
+        //}
 
         if (existingItem != null)
         {
@@ -44,10 +40,10 @@ public class BunkerInventory : Inventory
         }
     }
 
-    private void SetActiveWeapon(Item item)
-    {
-        Debug.Log("Active weapon = " + item.gameObject.name);
-    }
+    //private void SetActiveWeapon(Item item)
+    //{
+    //    Debug.Log("Active weapon = " + item.gameObject.name);
+    //}
 
     private void OnRemoveItemFromBunkerInventory(int index)
     {

@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class Bullet : MonoBehaviour, IAttacker
+public class PlayerBullet : MonoBehaviour, IAttacker
 {
-    [SerializeField] private LayerMask playerMask;
+    [SerializeField] private LayerMask enemyMask;
     [SerializeField] private LayerMask wallMask;
 
     private Vector3 _moveDirection;
@@ -33,22 +32,22 @@ public class Bullet : MonoBehaviour, IAttacker
 
     private void Update()
     {
-        if(_moveDirection == Vector3.zero) return;
+        if (_moveDirection == Vector3.zero) return;
 
         transform.position += _moveDirection * moveSpeed * Time.deltaTime;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (1<< collision.gameObject.layer == playerMask)
+        if (1 << collision.gameObject.layer == enemyMask)
         {
             var defender = collision.gameObject.GetComponent<IDefender>();
-            var dirToPlayer = (collision.transform.position - transform.position).normalized;
-            var combat = new Combat(this, defender, dirToPlayer, transform.position);
+            var dirToEnemy = (collision.transform.position - transform.position).normalized;
+            var combat = new Combat(this, defender, dirToEnemy, transform.position);
             combat.Fight();
             Destroy();
         }
-        else if(1<<collision.gameObject.layer == wallMask)
+        else if (1 << collision.gameObject.layer == wallMask)
         {
             Destroy();
         }
@@ -61,5 +60,4 @@ public class Bullet : MonoBehaviour, IAttacker
             Destroy(gameObject);
         }
     }
-
 }

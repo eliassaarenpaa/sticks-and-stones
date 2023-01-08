@@ -14,7 +14,7 @@ public class EasyEnemy : Enemy
     [SerializeField] private float chargeDuration;
     [SerializeField] private float shootRecoverDuration;
     [SerializeField] private float stunDuration;
-    [SerializeField] private Bullet bulletPrefab;
+    [SerializeField] private EnemyBullet bulletPrefab;
     [SerializeField] private Transform bulletSpawnPos;
     [SerializeField] private ParticleSystem shootParticle;
 

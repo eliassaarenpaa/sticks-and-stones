@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerWeaponController : MonoBehaviour
 {
+    [SerializeField] private PlayerWeaponSystem playerWeaponSystem;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private Animator weaponAnimator;
     [SerializeField] private Transform weaponParent;
@@ -22,17 +23,24 @@ public class PlayerWeaponController : MonoBehaviour
 
         weaponParent.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-        weapon.flipY = weapon.transform.position.x <= transform.position.x;
-        //var directionToMouse = new Vector3(Mathf.Sin(Mathf.Deg2Rad * angle), Mathf.Cos(Mathf.Deg2Rad * angle)).normalized;
+        var activeWeapon = playerWeaponSystem.GetActiveWeapon();
 
-        weapon.sortingOrder = weapon.transform.position.y > transform.position.y ? -1 : 1;
-
-        //weapon.transform.position = transform.position + -directionToMouse * 2f;
-
-        if (Input.GetMouseButtonDown(0))
+        if (activeWeapon)
         {
-            weaponAnimator.Play("Attack");
-            audioSource.Play();
+            if (activeWeapon.useFlip)
+            {
+                weapon.flipY = weapon.transform.position.x <= transform.position.x;
+            }
+
+            weapon.sortingOrder = weapon.transform.position.y > transform.position.y ? -1 : 1;
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                weaponAnimator.Play("Attack");
+                audioSource.Play();
+                Vector2 direction = new Vector2(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle));
+                playerWeaponSystem.GetActiveWeapon()?.OnAttack(weaponParent.transform.position, direction.normalized);
+            }
         }
 
     }

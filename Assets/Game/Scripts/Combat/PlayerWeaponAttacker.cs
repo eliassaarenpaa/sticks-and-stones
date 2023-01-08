@@ -25,9 +25,4 @@ public class PlayerWeaponAttacker : MonoBehaviour, IAttacker
             }
         }
     }
-
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-        
-    //}
 }
