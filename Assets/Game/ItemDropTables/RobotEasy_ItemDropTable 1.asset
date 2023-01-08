@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f6207f920ba72f4b87dd108c2fdbe1b, type: 3}
+  m_Name: RobotEasy_ItemDropTable 1
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 7014712309067921805, guid: 41b48a6a3443b574db9c479c6c0ff9cc, type: 3}
+  - {fileID: 7014712309067921805, guid: 73c65ea218b27d74abfa5eeb6bc3e97e, type: 3}

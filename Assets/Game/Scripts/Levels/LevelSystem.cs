@@ -11,6 +11,11 @@ public class LevelSystem : MonoBehaviour
     private Level _currentLevel;
     private int _currentLevelIndex = -1;
 
+    private void Start()
+    {
+        levelEventChannel.SetLevelCounter(_currentLevelIndex + 1, allLevels.Count);
+    }
+
     private void OnEnable()
     {
         levelEventChannel.onStartNewLevel.AddListener(OnStartNextLevel);
