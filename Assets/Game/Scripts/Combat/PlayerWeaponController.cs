@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerWeaponController : MonoBehaviour
 {
+    [SerializeField] private AudioSource audioSource;
     [SerializeField] private Animator weaponAnimator;
     [SerializeField] private Transform weaponParent;
     [SerializeField] private SpriteRenderer weapon;
@@ -28,9 +29,10 @@ public class PlayerWeaponController : MonoBehaviour
 
         //weapon.transform.position = transform.position + -directionToMouse * 2f;
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             weaponAnimator.Play("Attack");
+            audioSource.Play();
         }
 
     }

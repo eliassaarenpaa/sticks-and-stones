@@ -18,12 +18,16 @@ public class PlayerSystem : MonoBehaviour
     private void OnEnable()
     {
         levelEventChannel.onStartNewLevel.AddListener(SpawnPlayer);
+        levelEventChannel.onStopLevel.AddListener(DestroyPlayer);
+        levelEventChannel.onCompleteLevel.AddListener(DestroyPlayer);
         playerEventChannel.onDestroyPlayer.AddListener(DestroyPlayer);
     }
 
     private void OnDisable()
     {
         levelEventChannel.onStartNewLevel.RemoveListener(SpawnPlayer);
+        levelEventChannel.onStopLevel.RemoveListener(DestroyPlayer);
+        levelEventChannel.onCompleteLevel.RemoveListener(DestroyPlayer);
         playerEventChannel.onDestroyPlayer.RemoveListener(DestroyPlayer);
     }
 

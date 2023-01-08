@@ -168,7 +168,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryEventChannel: {fileID: 11400000, guid: 660e01ebcd5bed94db6a51dedee49bd2, type: 2}
-  itemMergeRecipes: []
+  itemMergeRecipes:
+  - item1: {fileID: 7014712309067921805, guid: 2c7e38801f5b30e4195000636725402f, type: 3}
+    item2: {fileID: 7014712309067921805, guid: 2c7e38801f5b30e4195000636725402f, type: 3}
+    result: {fileID: 7014712309067921805, guid: 6f98c05c6f1e0f64895127dbc65ba5c7, type: 3}
+  - item1: {fileID: 3648772220464123316, guid: 259dee2a18e7d404c97e1c4358116ea0, type: 3}
+    item2: {fileID: 3648772220464123316, guid: 259dee2a18e7d404c97e1c4358116ea0, type: 3}
+    result: {fileID: 7014712309067921805, guid: 2c7e38801f5b30e4195000636725402f, type: 3}
 --- !u!1 &20944218
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,7 +342,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: a6e69556f0d0d5843a00d94f6ed3b222, type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 2e3a3ab179cb4004aa74afed56d56452, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1775,6 +1781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8a4e7b6b975e2b46a69c2a5b1abbfdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 1022191506}
   weaponAnimator: {fileID: 2066578174}
   weaponParent: {fileID: 1260549787}
   weapon: {fileID: 2066578173}
@@ -1802,6 +1809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb0cefdf9a8346c41883e9ac510609b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathSource: {fileID: 165735309}
   playerAnimator: {fileID: 857187447}
   playerEventChannel: {fileID: 11400000, guid: 2cb8f93207492f641ac3a9f27eb222b2, type: 2}
   playerHealthEventChannel: {fileID: 11400000, guid: 1bafb0fa77647fe428f866f8490d684a, type: 2}
@@ -2233,7 +2241,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: a6e69556f0d0d5843a00d94f6ed3b222, type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 8a562b8620cf61d4983bb88fa5f369e6, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IDefender
 {
+    [SerializeField] private AudioSource deathSource;
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private PlayerEventChannel playerEventChannel;
     [SerializeField] private PlayerHealthEventChannel playerHealthEventChannel;
@@ -36,6 +37,7 @@ public class Player : MonoBehaviour, IDefender
         GetComponent<PlayerMovement>().enabled = false;
         GetComponent<PlayerWeaponController>().enabled = false;
         playerAnimator.Play("Death");
+        deathSource.Play();
         StartCoroutine(DestroyPlayer());
         Time.timeScale = 0;
     }

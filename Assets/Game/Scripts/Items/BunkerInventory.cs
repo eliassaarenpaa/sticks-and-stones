@@ -1,13 +1,14 @@
 using Assets.Game.Scripts.Items;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BunkerInventory : Inventory
 {
     [SerializeField] private InventoryEventChannel inventoryEventChannel;
     [SerializeField] private WeaponItem initialWeapon;
-
+    private void Start()
+    {
+        inventoryEventChannel.AddItemToBunkerInventory(0, Instantiate(initialWeapon));
+    }
     private void OnEnable()
     {
         inventoryEventChannel.onAddItemToBunkerInventory.AddListener(OnAddItemToBunkerInventory);
@@ -53,9 +54,5 @@ public class BunkerInventory : Inventory
         itemSlots[index].item = null;
     }
 
-    private void Start()
-    {
 
-        inventoryEventChannel.AddItemToBunkerInventory(0, Instantiate(initialWeapon));
-    }
 }

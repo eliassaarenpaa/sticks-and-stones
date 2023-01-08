@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class IngameInventory : Inventory
@@ -20,8 +18,6 @@ public class IngameInventory : Inventory
 
     private void OnAddItemToIngameInventory(int index, Item item)
     {
-        Debug.Log(itemSlots[index]);
-
         var existingItem = itemSlots[index]?.item;
 
         if (existingItem != null)

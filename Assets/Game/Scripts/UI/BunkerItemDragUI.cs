@@ -25,19 +25,6 @@ public class BunkerItemDragUI : MonoBehaviour
             case InventoryType.Ingame:
                 var ingameSlot = ingameInventory.itemSlots[index];
 
-                Debug.Log(ingameInventory.itemSlots.Count);
-
-                Debug.Log("index = " + index);
-                Debug.Log("ingameSlot = " + ingameSlot);
-
-                //if (ingameSlot == null)
-                //{
-                //    return;
-                //}
-
-                Debug.Log("_selectedItem = " + _selectedItem);
-                Debug.Log("ingameSlot.item = " + ingameSlot.item);
-
                 // Pick up item
                 if (_selectedItem == null)
                 {
@@ -69,10 +56,13 @@ public class BunkerItemDragUI : MonoBehaviour
                     // If not empty -> Merge item
                     else
                     {
-                        inventoryEventChannel.MergeItems(InventoryType.Ingame, index, ingameSlot.item, _selectedItem);
-                        _selectedItem = null;
-                        selected.sprite = null;
-                        selected.enabled = false;
+                        var mergeSucceeded = inventoryEventChannel.MergeItems(InventoryType.Ingame, index, ingameSlot.item, _selectedItem);
+                        if (mergeSucceeded)
+                        {
+                            _selectedItem = null;
+                            selected.sprite = null;
+                            selected.enabled = false;
+                        }
                     }
                 }
 
@@ -124,10 +114,22 @@ public class BunkerItemDragUI : MonoBehaviour
                     // If not empty -> Merge item
                     else
                     {
-                        inventoryEventChannel.MergeItems(InventoryType.Bunker, index, bunkerSlot.item, _selectedItem);
-                        _selectedItem = null;
-                        selected.sprite = null;
-                        selected.enabled = false;
+                        // If trying to merge into weapon slot, but result != weapon -> dont allow merge
+                        if(index == 0)
+                        {
+                            if(!inventoryEventChannel.MergeResultIsWeapon(bunkerSlot.item, _selectedItem))
+                            {
+                                return;
+                            }
+                        }
+
+                        var mergeSucceeded = inventoryEventChannel.MergeItems(InventoryType.Bunker, index, bunkerSlot.item, _selectedItem);
+                        if (mergeSucceeded)
+                        {
+                            _selectedItem = null;
+                            selected.sprite = null;
+                            selected.enabled = false;
+                        }
                     }
 
                 }

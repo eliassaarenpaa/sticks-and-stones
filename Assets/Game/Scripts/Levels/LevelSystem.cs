@@ -42,6 +42,8 @@ public class LevelSystem : MonoBehaviour
 
     private void OnStartNextLevel()
     {
+        ClearItems();
+
         _currentLevelIndex++;
 
         if(_currentLevelIndex >= allLevels.Count)
@@ -65,14 +67,19 @@ public class LevelSystem : MonoBehaviour
     private void OnStopLevel()
     {
         // Clear items
-        foreach (var item in FindObjectsOfType<Item>())
-        {
-            Destroy(item.gameObject);
-        }
+        ClearItems();
 
         if (_currentLevel?.gameObject)
         {
             Destroy(_currentLevel.gameObject);
+        }
+    }
+
+    private void ClearItems()
+    {
+        foreach (var item in FindObjectsOfType<Item>())
+        {
+            Destroy(item.gameObject);
         }
     }
 

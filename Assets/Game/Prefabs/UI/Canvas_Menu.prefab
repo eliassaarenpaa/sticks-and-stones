@@ -66,10 +66,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Go To Game
+  m_text: Play
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1318369c587482b4c9c0da3a2910baf2, type: 2}
+  m_sharedMaterial: {fileID: -2288040009832927563, guid: 1318369c587482b4c9c0da3a2910baf2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -93,13 +93,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 37.67
+  m_fontSizeBase: 37.67
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 16
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -487,34 +487,6 @@ PrefabInstance:
     - target: {fileID: 2177862270671334002, guid: 0705a42a44b27a94aa9f6beead43fd42, type: 3}
       propertyPath: m_Name
       value: Canvas_Menu
-      objectReference: {fileID: 0}
-    - target: {fileID: 2386770759263748932, guid: 0705a42a44b27a94aa9f6beead43fd42, type: 3}
-      propertyPath: m_text
-      value: Menu
-      objectReference: {fileID: 0}
-    - target: {fileID: 2386770759263748932, guid: 0705a42a44b27a94aa9f6beead43fd42, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-    - target: {fileID: 2386770759263748932, guid: 0705a42a44b27a94aa9f6beead43fd42, type: 3}
-      propertyPath: m_fontColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2386770759263748932, guid: 0705a42a44b27a94aa9f6beead43fd42, type: 3}
-      propertyPath: m_fontColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2386770759263748932, guid: 0705a42a44b27a94aa9f6beead43fd42, type: 3}
-      propertyPath: m_fontColor.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2386770759263748932, guid: 0705a42a44b27a94aa9f6beead43fd42, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-    - target: {fileID: 2386770759263748932, guid: 0705a42a44b27a94aa9f6beead43fd42, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4278190080
       objectReference: {fileID: 0}
     - target: {fileID: 5175614388073698327, guid: 0705a42a44b27a94aa9f6beead43fd42, type: 3}
       propertyPath: m_AnchoredPosition.y

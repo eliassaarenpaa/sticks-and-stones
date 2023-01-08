@@ -1,4 +1,5 @@
 using Assets.Game.Scripts.Items;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,36 +11,68 @@ public class ItemMergeSystem : MonoBehaviour
 
     private void OnEnable()
     {
-        inventoryEventChannel.onMergeItems.AddListener(OnMergeItems);
+        inventoryEventChannel.onMergeItems += OnMergeItems;
+        inventoryEventChannel.onCheckMergeResultIsWeapon += OnCheckMergeResultIsWeapon;
     }
 
     private void OnDisable()
     {
-        inventoryEventChannel.onMergeItems.RemoveListener(OnMergeItems);
+        inventoryEventChannel.onMergeItems -= OnMergeItems;
+        inventoryEventChannel.onCheckMergeResultIsWeapon -= OnCheckMergeResultIsWeapon;
+    }
+    private bool OnCheckMergeResultIsWeapon(Item item1, Item item2)
+    {
+        var recipe = FindMergeRecipe(item1, item2);
+
+        if (recipe == default)
+        {
+            Debug.LogWarning("No Recipe Found!");
+            return false;
+        }
+
+        return recipe.result.GetComponent<WeaponItem>() != null;
     }
 
-    private void OnMergeItems(InventoryType inventoryType, int index, Item slotItem, Item selectedItem)
+    /// <summary>
+    /// Returns true if succeeded
+    /// </summary>
+    /// <param name="inventoryType"></param>
+    /// <param name="index"></param>
+    /// <param name="slotItem"></param>
+    /// <param name="selectedItem"></param>
+    /// <returns></returns>
+    private bool OnMergeItems(InventoryType inventoryType, int index, Item slotItem, Item selectedItem)
     {
         var recipe = FindMergeRecipe(slotItem, selectedItem);
-        var resultItem = recipe.result;
-        var resultItemInstance = Instantiate(resultItem);
-        resultItemInstance.gameObject.SetActive(false);
+
+        if(recipe == default)
+        {
+            Debug.LogWarning("No Recipe Found!");
+            return false;
+        }
+
+        var resultItemPrefab = recipe.result;
+        var resultItemInstance = Instantiate(resultItemPrefab);
 
         switch(inventoryType)
         {
             case InventoryType.Ingame:
-
+                inventoryEventChannel.AddItemToIngameInventory(index, resultItemInstance);
                 break;
 
             case InventoryType.Bunker:
-                
+                inventoryEventChannel.AddItemToBunkerInventory(index, resultItemInstance);                
                 break;
         }
+
+        return true;
     }
 
-    private ItemMergeRecipe FindMergeRecipe(Item a, Item b)
+    private ItemMergeRecipe FindMergeRecipe(Item item1, Item item2)
     {
-        return itemMergeRecipes.First(x => x.item1 == a && x.item2 == b || x.item2 == a && x.item1 == b);
+        return itemMergeRecipes.FirstOrDefault(x =>
+            x.item1.sprite == item1.sprite && x.item2.sprite == item2.sprite || x.item1.sprite == item2.sprite && x.item2.sprite == item1.sprite
+        ) ;
     }
 
 }

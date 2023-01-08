@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,7 +10,9 @@ public class InventoryEventChannel : ScriptableObject
 
     public UnityEvent<int, Item> onAddItemToIngameInventory = new UnityEvent<int, Item>();
     public UnityEvent<int> onRemoveItemFromIngameInventory = new UnityEvent<int>();
-    public UnityEvent<InventoryType, int, Item, Item> onMergeItems = new UnityEvent<InventoryType, int, Item, Item>();
+    public Func<InventoryType, int, Item, Item, bool> onMergeItems;
+
+    public Func<Item, Item, bool> onCheckMergeResultIsWeapon;
 
 
     public void AddItemToBunkerInventory(int itemSlotIndex, Item item)
@@ -31,8 +34,14 @@ public class InventoryEventChannel : ScriptableObject
         onRemoveItemFromIngameInventory?.Invoke(itemSlotIndex);
     }
 
-    public void MergeItems(InventoryType inventoryType, int index, Item item, Item selectedItem)
+    public bool MergeItems(InventoryType inventoryType, int index, Item item, Item selectedItem)
     {
-        onMergeItems?.Invoke(inventoryType, index, item, selectedItem);
+        return onMergeItems(inventoryType, index, item, selectedItem);
+        //return onMergeItems?.Invoke(inventoryType, index, item, selectedItem);
+    }
+
+    public bool MergeResultIsWeapon(Item item1, Item item2)
+    {
+        return onCheckMergeResultIsWeapon(item1, item2);
     }
 }
