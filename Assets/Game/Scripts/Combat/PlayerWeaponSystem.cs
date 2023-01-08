@@ -29,7 +29,6 @@ public class PlayerWeaponSystem : MonoBehaviour
 
     private void OnAddItemToBunkerInv(int index, Item item)
     {
-        Debug.Log(index);
         if(index == 0)
         {
             _activeWeapon = item;

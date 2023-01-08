@@ -13,7 +13,9 @@ public class BunkerItemDragUI : MonoBehaviour
     [SerializeField] private Image selected;
 
     private Item _selectedItem;
-    private Index _originIndex;
+
+    InventoryType _selectedItemOriginInv;
+    private int _selectedItemOriginIndex;
 
     public void OnPressDown(InventoryType inventoryType , int index)
     {
@@ -40,6 +42,8 @@ public class BunkerItemDragUI : MonoBehaviour
                         inventoryEventChannel.RemoveItemFromIngameInventory(index);
                         selected.sprite = _selectedItem.sprite;
                         selected.enabled = true;
+                        _selectedItemOriginInv = InventoryType.Ingame;
+                        _selectedItemOriginIndex = index;
                     }
 
                 }
@@ -98,6 +102,8 @@ public class BunkerItemDragUI : MonoBehaviour
                         inventoryEventChannel.RemoveItemFromBunkerInventory(index);
                         selected.sprite = _selectedItem.sprite;
                         selected.enabled = true;
+                        _selectedItemOriginInv = InventoryType.Bunker;
+                        _selectedItemOriginIndex = index;
                     }
 
                 }
@@ -114,14 +120,6 @@ public class BunkerItemDragUI : MonoBehaviour
                     // If not empty -> Merge item
                     else
                     {
-                        // If trying to merge into weapon slot, but result != weapon -> dont allow merge
-                        if(index == 0)
-                        {
-                            if(!inventoryEventChannel.MergeResultIsWeapon(bunkerSlot.item, _selectedItem))
-                            {
-                                return;
-                            }
-                        }
 
                         var mergeSucceeded = inventoryEventChannel.MergeItems(InventoryType.Bunker, index, bunkerSlot.item, _selectedItem);
                         if (mergeSucceeded)
@@ -130,6 +128,56 @@ public class BunkerItemDragUI : MonoBehaviour
                             selected.sprite = null;
                             selected.enabled = false;
                         }
+                        else
+                        {
+
+                            Debug.Log(bunkerSlot.item.name);
+
+                            // Add selected item in slot to selected origin inv
+                            switch (_selectedItemOriginInv)
+                            {
+                                case InventoryType.Ingame:
+                                    inventoryEventChannel.AddItemToIngameInventory(_selectedItemOriginIndex, bunkerSlot.item);
+                                    break;
+                                case InventoryType.Bunker:
+                                    inventoryEventChannel.AddItemToBunkerInventory(_selectedItemOriginIndex, bunkerSlot.item);
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            // Swap the selected item to be equipped
+                            inventoryEventChannel.AddItemToBunkerInventory(index, _selectedItem);
+
+
+                            Debug.Log("_SelectedItem=" + _selectedItem);
+
+                            // Add the hovering/selected item to the bunker first slot
+
+                            _selectedItem = null;
+                            selected.sprite = null;
+                            selected.enabled = false;
+                        }
+
+                        
+                        //else
+                        //{
+
+                        //    // If trying to merge into weapon slot, but result != weapon -> dont allow merge
+                        //    //if(index == 0)
+                        //    //{
+                        //    //    Debug.Log("inventoryEventChannel.MergeResultIsWeapon(bunkerSlot.item, _selectedItem) = " + inventoryEventChannel.MergeResultIsWeapon(bunkerSlot.item, _selectedItem));
+
+                        //    //    if(!inventoryEventChannel.MergeResultIsWeapon(bunkerSlot.item, _selectedItem))
+                        //    //    {
+                        //    //        return;
+                        //    //    }
+                        //    //}
+
+                           
+                        //}
+
+
                     }
 
                 }

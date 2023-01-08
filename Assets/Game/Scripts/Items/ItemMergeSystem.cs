@@ -30,7 +30,9 @@ public class ItemMergeSystem : MonoBehaviour
             return false;
         }
 
-        return recipe.result.GetComponent<WeaponItem>() != null;
+        return true;
+
+        //return recipe.result.GetComponent<WeaponItem>() != null;
     }
 
     /// <summary>
@@ -70,6 +72,14 @@ public class ItemMergeSystem : MonoBehaviour
 
     private ItemMergeRecipe FindMergeRecipe(Item item1, Item item2)
     {
+
+        if (item1 == null || item2 == null)
+        {
+            Debug.Log("item1=" + item1);
+            Debug.Log("item2=" + item2);
+            return default;
+        }
+
         return itemMergeRecipes.FirstOrDefault(x =>
             x.item1.sprite == item1.sprite && x.item2.sprite == item2.sprite || x.item1.sprite == item2.sprite && x.item2.sprite == item1.sprite
         ) ;
