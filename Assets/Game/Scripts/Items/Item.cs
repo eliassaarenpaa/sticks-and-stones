@@ -1,10 +1,9 @@
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class Item : MonoBehaviour
 {
     public Sprite sprite;
-    public AnimatorController controller;
+    public RuntimeAnimatorController controller;
     [Range(0f, 1f)]
     public float dropChance;
     public int damage;

@@ -1,6 +1,3 @@
-using Assets.Game.Scripts.Items;
-using System;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerWeaponSystem : MonoBehaviour
@@ -46,7 +43,7 @@ public class PlayerWeaponSystem : MonoBehaviour
         return _activeWeapon != null ? _activeWeapon.damage : 0;
     }
 
-    public AnimatorController GetWeaponAnimator()
+    public RuntimeAnimatorController GetWeaponAnimator()
     {
         return _activeWeapon.controller;
     }
