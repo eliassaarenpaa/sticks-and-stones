@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class LevelSystem : MonoBehaviour
 {
+    [SerializeField] private AudioSource levelSource;
     [SerializeField] private LevelEventChannel levelEventChannel;
     [SerializeField] private GameStateEventChannel gameStateEventChannel;
     [SerializeField] private List<Level> allLevels;
@@ -45,6 +46,7 @@ public class LevelSystem : MonoBehaviour
 
     private void OnStartNextLevel()
     {
+        levelSource.Play();
         ClearItems();
         _currentLevelIndex++;
         _currentLevel = Instantiate(allLevels[_currentLevelIndex]);
@@ -69,6 +71,7 @@ public class LevelSystem : MonoBehaviour
 
     private void OnStopLevel()
     {
+        levelSource.Stop();
         ClearItems();
 
         if (_currentLevel)

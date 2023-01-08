@@ -8,6 +8,7 @@ public class CanvasSwitcherSystem : MonoBehaviour
     [SerializeField] private AudioSource canvasSwitchSource;
     [SerializeField] private AudioSource failSource;
     [SerializeField] private AudioSource winSource;
+    [SerializeField] private AudioSource menuSource;
 
     [SerializeField] private GameStateEventChannel gameStateEventChannel;
     [SerializeField] private UIEventChannel uIEventChannel;
@@ -46,6 +47,15 @@ public class CanvasSwitcherSystem : MonoBehaviour
 
     private void OnGameStateChanged(GameState state)
     {
+        if(state == GameState.MainMenu || state == GameState.Bunker)
+        {
+            menuSource.Play();
+        }
+        else
+        {
+            menuSource.Stop();
+        }
+
         switch (state)
         {
             case GameState.Paused:
@@ -54,6 +64,7 @@ public class CanvasSwitcherSystem : MonoBehaviour
                 break;
             case GameState.MainMenu:
                 canvasSwitchSource.Play();
+                
                 SwitchToCanvas("Menu");
                 break;
             case GameState.Game:
