@@ -8,7 +8,6 @@ public class Level : MonoBehaviour
     [SerializeField] private LevelEventChannel levelEventChannel;
     [SerializeField] private float duration;
     [SerializeField] private float spawnRateMin, spawnRateMax;
-    [SerializeField] private int maxEnemies;
     [SerializeField] private List<GameObject> enemyPrefabs;
     [SerializeField] private List<Transform> spawnPoints;
 
@@ -17,9 +16,6 @@ public class Level : MonoBehaviour
     private float _spawnRateTimer;
     private float _currentSpawnRate;
 
-    private int _enemiesSpawned;
-    private bool _isCompleted;
-
     private void Start()
     {
         _player = GameObject.FindWithTag("Player").transform;
@@ -27,7 +23,6 @@ public class Level : MonoBehaviour
 
     public void StartLevel()
     {
-        _isCompleted = false;
         _spawnRateTimer = 0;
         _currentSpawnRate = GetRandomSpawnRate();
         StartCoroutine(CompleteRoutine());
@@ -40,19 +35,10 @@ public class Level : MonoBehaviour
 
     private void Update()
     {
-        //if(_enemiesSpawned >= maxEnemies && !_isCompleted)
-        //{
-        //    _isCompleted = true;
-        //    levelEventChannel.CompleteLevel();
-
-        //    return;
-        //}
-
         _spawnRateTimer += Time.deltaTime;
 
         if(_spawnRateTimer >= _currentSpawnRate)
         {
-            //_enemiesSpawned++;
             _currentSpawnRate = GetRandomSpawnRate();
             _spawnRateTimer = 0;
 

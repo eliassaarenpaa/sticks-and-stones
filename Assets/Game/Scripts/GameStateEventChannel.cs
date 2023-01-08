@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Permissions;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -23,12 +20,12 @@ public class GameStateEventChannel : ScriptableObject
     public GameState GetCurrentState => (GameState)currentState;
 
     /// <summary>
-    /// -1 = Pause (call toggles it)
+    /// -1 = Pause
     /// 0 = Menu,
     /// 1 = Game,
-    /// 2 = Bunker
-    /// 
-    /// 
+    /// 2 = Bunker,
+    /// 3 = Fail
+    /// 4 = Win
     /// </summary>
     /// <param name="state"></param>
     public void ChangeState(int state)

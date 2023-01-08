@@ -4,5 +4,6 @@ public enum GameState
     MainMenu = 0,
     Game = 1,
     Bunker = 2,
-    Failure = 3,
+    Fail = 3,
+    Win = 4
 }

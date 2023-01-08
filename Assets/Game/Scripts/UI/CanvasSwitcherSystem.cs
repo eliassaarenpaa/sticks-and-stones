@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class CanvasSwitcherSystem : MonoBehaviour
 {
+    [SerializeField] private AudioSource canvasSwitchSource;
+    [SerializeField] private AudioSource failSource;
+    [SerializeField] private AudioSource winSource;
+
     [SerializeField] private GameStateEventChannel gameStateEventChannel;
     [SerializeField] private UIEventChannel uIEventChannel;
     [SerializeField] private float curtainFadeInDuration;
@@ -45,41 +49,31 @@ public class CanvasSwitcherSystem : MonoBehaviour
         switch (state)
         {
             case GameState.Paused:
+                canvasSwitchSource.Play();
                 SwitchToCanvas("Pause");
                 break;
             case GameState.MainMenu:
+                canvasSwitchSource.Play();
                 SwitchToCanvas("Menu");
                 break;
             case GameState.Game:
+                canvasSwitchSource.Play();
                 SwitchToCanvas("Game");
                 break;
             case GameState.Bunker:
+                canvasSwitchSource.Play();
                 SwitchToCanvas("Bunker");
+                break;
+            case GameState.Fail:
+                failSource.Play();
+                SwitchToCanvas("Fail");
+                break;
+            case GameState.Win:
+                winSource.Play();
+                SwitchToCanvas("Win");
                 break;
         }
     }
-
-    //private void OnPause(bool isPaused)
-    //{
-    //    if (isPaused)
-    //    {
-    //        if(_activeCanvasObject.canvasName == "Game")
-    //        {
-    //            DisableAllCanvasObjects();
-    //        }
-
-    //        EnableCanvas(pause);
-    //    }
-    //    else
-    //    {
-    //        if(_activeCanvasObject.canvasName == "Game")
-    //        {
-    //            EnableCanvas(_activeCanvasObject);
-    //        }
-    //        DisableCanvas(pause);
-    //    }
-    //}
-
 
     public void SwitchToCanvas(string canvasName)
     {
@@ -118,8 +112,6 @@ public class CanvasSwitcherSystem : MonoBehaviour
 
         _activeCanvasObject = newCanvasObject;
     }
-
-
 
     private void FadeInCurtain(Action callback)
     {

@@ -1,11 +1,11 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IDefender
 {
     [SerializeField] private AudioSource deathSource;
+    [SerializeField] private AudioSource hitSource;
+
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private PlayerEventChannel playerEventChannel;
     [SerializeField] private PlayerHealthEventChannel playerHealthEventChannel;
@@ -23,6 +23,7 @@ public class Player : MonoBehaviour, IDefender
     {
         Health -= 1;
 
+        hitSource.Play();
         //PlayHitEffects(contactPoint);
         //TakeKnockBack(attacker);
 

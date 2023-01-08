@@ -8,6 +8,8 @@ public class LevelEventChannel : ScriptableObject
     public UnityEvent onStopLevel = new UnityEvent();
     public UnityEvent onCompleteLevel = new UnityEvent();
 
+    public UnityEvent<int, int> onSetLevelCounter = new UnityEvent<int, int>();
+
     public UnityEvent<float> onSetLevelTimerForUI = new UnityEvent<float>();
 
     public void StartNewLevel()
@@ -28,6 +30,11 @@ public class LevelEventChannel : ScriptableObject
     public void SetLevelTimerForUI(float timeInSeconds)
     {
         onSetLevelTimerForUI?.Invoke(timeInSeconds);
+    }
+
+    public void SetLevelCounter(int currentLevel, int maxLevels)
+    {
+        onSetLevelCounter?.Invoke(currentLevel, maxLevels);
     }
 
 }

@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class LevelSystem : MonoBehaviour
@@ -34,26 +32,21 @@ public class LevelSystem : MonoBehaviour
         {
             Restart();
         }
-        else if (state == GameState.Failure)
+        else if (state == GameState.Fail)
         {
             OnStopLevel();
         }
+        else if (state == GameState.Bunker)
+        {
+            levelEventChannel.SetLevelCounter(_currentLevelIndex + 1, allLevels.Count);
+        }
+
     }
 
     private void OnStartNextLevel()
     {
         ClearItems();
-
         _currentLevelIndex++;
-
-        if(_currentLevelIndex >= allLevels.Count)
-        {
-            Debug.Log("You Win, Thanks For Playing!");
-
-            gameStateEventChannel.ChangeState(0);
-            return;
-        }
-
         _currentLevel = Instantiate(allLevels[_currentLevelIndex]);
         _currentLevel.StartLevel();
     }
@@ -61,18 +54,31 @@ public class LevelSystem : MonoBehaviour
     private void OnCompleteLevel()
     {
         OnStopLevel();
-        gameStateEventChannel.ChangeState(2);
+
+        if (_currentLevelIndex + 1 >= allLevels.Count)
+        {
+            Debug.Log("You Win, Thanks For Playing!");
+
+            gameStateEventChannel.ChangeState(4);
+        }
+        else
+        {
+            gameStateEventChannel.ChangeState(2);
+        }
     }
 
     private void OnStopLevel()
     {
-        // Clear items
         ClearItems();
 
-        if (_currentLevel?.gameObject)
+        if (_currentLevel)
         {
-            Destroy(_currentLevel.gameObject);
+            if (_currentLevel.gameObject)
+            {
+                Destroy(_currentLevel.gameObject);
+            }
         }
+
     }
 
     private void ClearItems()
