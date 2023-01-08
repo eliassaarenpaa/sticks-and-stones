@@ -210,9 +210,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelEventChannel: {fileID: 11400000, guid: 39500b32fed28d04f81010ea88626815, type: 2}
-  duration: 10
-  spawnRateMin: 1
-  spawnRateMax: 2
+  duration: 30
+  spawnRateMin: 0.5
+  spawnRateMax: 1.5
   enemyPrefabs:
   - {fileID: 5394353573816038690, guid: 2fe90feebb530b249bb4dd7825b29ba6, type: 3}
   - {fileID: 5394353573816038690, guid: 35f0456169b44224e8f755f0f6d581b9, type: 3}

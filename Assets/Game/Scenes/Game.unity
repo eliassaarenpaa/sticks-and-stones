@@ -175,6 +175,9 @@ MonoBehaviour:
   - item1: {fileID: 7014712309067921805, guid: 73c65ea218b27d74abfa5eeb6bc3e97e, type: 3}
     item2: {fileID: 7014712309067921805, guid: 73c65ea218b27d74abfa5eeb6bc3e97e, type: 3}
     result: {fileID: 8651534455499958778, guid: 1ad89d823e34c5c49bdcb36e998b1ed2, type: 3}
+  - item1: {fileID: 7014712309067921805, guid: 41b48a6a3443b574db9c479c6c0ff9cc, type: 3}
+    item2: {fileID: 7014712309067921805, guid: 41b48a6a3443b574db9c479c6c0ff9cc, type: 3}
+    result: {fileID: 7014712309067921805, guid: 34d6b6e7ca798ec4097c396392046e43, type: 3}
 --- !u!1 &20944218
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,9 +227,11 @@ MonoBehaviour:
   levelEventChannel: {fileID: 11400000, guid: 39500b32fed28d04f81010ea88626815, type: 2}
   gameStateEventChannel: {fileID: 11400000, guid: 0303af51e4674af4fbc6cc2643194d23, type: 2}
   allLevels:
-  - {fileID: 6900733983716086123, guid: 35c00f28d2db4fa4d8c371354f84282a, type: 3}
   - {fileID: 6900733983716086123, guid: d73c5465e0a332d41ab8358754d9c322, type: 3}
   - {fileID: 6900733983716086123, guid: a72676457c9d4664bba2d2a7c28a4fc8, type: 3}
+  - {fileID: 6900733983716086123, guid: eeddba72176071e459c266b165a379d8, type: 3}
+  - {fileID: 6900733983716086123, guid: dba2d78d62c03b5468047c9db2b2c4cf, type: 3}
+  - {fileID: 6900733983716086123, guid: 35c00f28d2db4fa4d8c371354f84282a, type: 3}
 --- !u!1 &74701332
 GameObject:
   m_ObjectHideFlags: 0
@@ -15741,7 +15746,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryEventChannel: {fileID: 11400000, guid: 660e01ebcd5bed94db6a51dedee49bd2, type: 2}
   initialWeapon: {fileID: 7014712309067921805, guid: 73c65ea218b27d74abfa5eeb6bc3e97e, type: 3}
-  initialWeapon2: {fileID: 7014712309067921805, guid: 41b48a6a3443b574db9c479c6c0ff9cc, type: 3}
+  initialWeapon2: {fileID: 7014712309067921805, guid: 73c65ea218b27d74abfa5eeb6bc3e97e, type: 3}
   weaponAnimator: {fileID: 2066578174}
 --- !u!1 &1524149166
 GameObject:
@@ -16801,7 +16806,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.375, y: 1.0625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -16817,7 +16822,7 @@ Animator:
   m_GameObject: {fileID: 2066578171}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 20de11d19ee187546858f10dbca06fff, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2d595bb36a5f95e4385e14bc938dc35a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -16851,7 +16856,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2066578171}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0

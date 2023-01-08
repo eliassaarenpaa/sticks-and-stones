@@ -80,5 +80,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: ff4490e8cf8f6bb44b438f1a17a5f6fb, type: 3}
   controller: {fileID: 9100000, guid: b15e9bbc0dbfd5a44ae48e1ff073e303, type: 2}
-  dropChance: 1
-  damage: 2
+  dropChance: 0.3
+  damage: 1
+  useFlip: 1

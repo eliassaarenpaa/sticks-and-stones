@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 6900733983716086122}
   - component: {fileID: 6900733983716086123}
   m_Layer: 0
-  m_Name: Level 1
+  m_Name: Level 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -210,10 +210,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelEventChannel: {fileID: 11400000, guid: 39500b32fed28d04f81010ea88626815, type: 2}
-  duration: 31
-  spawnRateMin: 0.5
-  spawnRateMax: 1.5
+  duration: 30
+  spawnRateMin: 2
+  spawnRateMax: 3
   enemyPrefabs:
+  - {fileID: 5394353573816038690, guid: 2fe90feebb530b249bb4dd7825b29ba6, type: 3}
+  - {fileID: 5394353573816038690, guid: 35f0456169b44224e8f755f0f6d581b9, type: 3}
   - {fileID: 5394353573816038690, guid: 35f0456169b44224e8f755f0f6d581b9, type: 3}
   spawnPoints:
   - {fileID: 6900733983397763469}
