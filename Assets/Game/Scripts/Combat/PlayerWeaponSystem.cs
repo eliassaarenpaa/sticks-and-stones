@@ -7,6 +7,8 @@ public class PlayerWeaponSystem : MonoBehaviour
 {
     [SerializeField] private InventoryEventChannel inventoryEventChannel;
     [SerializeField] private Item initialWeapon;
+    [SerializeField] private Item initialWeapon2;
+
     [SerializeField] private Animator weaponAnimator;
 
     private Item _activeWeapon;
@@ -14,6 +16,7 @@ public class PlayerWeaponSystem : MonoBehaviour
     private void Start()
     {
         inventoryEventChannel.AddItemToBunkerInventory(0, Instantiate(initialWeapon));
+        inventoryEventChannel.AddItemToBunkerInventory(2, Instantiate(initialWeapon2));
     }
 
     private void OnEnable()

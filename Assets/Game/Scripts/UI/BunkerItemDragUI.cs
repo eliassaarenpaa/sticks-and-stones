@@ -17,6 +17,28 @@ public class BunkerItemDragUI : MonoBehaviour
     InventoryType _selectedItemOriginInv;
     private int _selectedItemOriginIndex;
 
+    public void PutSelectedItemBack()
+    {
+        if(_selectedItem != null)
+        {
+            switch (_selectedItemOriginInv)
+            {
+                case InventoryType.Ingame:
+                    inventoryEventChannel.AddItemToIngameInventory(_selectedItemOriginIndex, _selectedItem);
+                    break;
+                case InventoryType.Bunker:
+                    inventoryEventChannel.AddItemToBunkerInventory(_selectedItemOriginIndex, _selectedItem);
+                    break;
+                default:
+                    break;
+
+            }
+            _selectedItem = null;
+            selected.sprite = null;
+            selected.enabled = false;
+        }
+    }
+
     public void OnPressDown(InventoryType inventoryType , int index)
     {
         //_originIndex = index;
@@ -131,8 +153,6 @@ public class BunkerItemDragUI : MonoBehaviour
                         else
                         {
 
-                            Debug.Log(bunkerSlot.item.name);
-
                             // Add selected item in slot to selected origin inv
                             switch (_selectedItemOriginInv)
                             {
@@ -150,7 +170,6 @@ public class BunkerItemDragUI : MonoBehaviour
                             inventoryEventChannel.AddItemToBunkerInventory(index, _selectedItem);
 
 
-                            Debug.Log("_SelectedItem=" + _selectedItem);
 
                             // Add the hovering/selected item to the bunker first slot
 

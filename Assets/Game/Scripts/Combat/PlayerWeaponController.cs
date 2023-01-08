@@ -31,6 +31,10 @@ public class PlayerWeaponController : MonoBehaviour
             {
                 weapon.flipY = weapon.transform.position.x <= transform.position.x;
             }
+            else
+            {
+                weapon.flipY = false;
+            }
 
             weapon.sortingOrder = weapon.transform.position.y > transform.position.y ? -1 : 1;
 
